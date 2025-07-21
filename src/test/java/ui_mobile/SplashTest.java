@@ -14,7 +14,7 @@ public class SplashTest extends AppiumConfig {
     }
 
     @Test
-    public void simpleAuthLoadTimeTest() {
+    public void AuthLoadTimeTest() {
         AuthenticationScreen authScreen = new AuthenticationScreen(driver);
 
         long start = System.currentTimeMillis();
