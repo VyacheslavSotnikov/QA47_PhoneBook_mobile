@@ -23,13 +23,13 @@ public abstract class AppiumConfig {
     public void setup(){
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.setCapability("platformName", "Android");
-        desiredCapabilities.setCapability("deviceName", "Pixel_3");
-        desiredCapabilities.setCapability("platformVersion", "8.0");
+        desiredCapabilities.setCapability("deviceName", "Pixel_9_Pro");
+        desiredCapabilities.setCapability("platformVersion", "16");
         //desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "8.0");
         desiredCapabilities.setCapability("appPackage","com.sheygam.contactapp");
         desiredCapabilities.setCapability("appActivity", ".SplashActivity");
-        desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "Appium");
-        String url = "http://localhost:4723/wd/hub";
+        desiredCapabilities.setCapability("automationName", "UiAutomator2");
+        String url = "http://localhost:4723";
         try {
             driver = new AndroidDriver(new URL(url), desiredCapabilities);
         } catch (MalformedURLException e) {
