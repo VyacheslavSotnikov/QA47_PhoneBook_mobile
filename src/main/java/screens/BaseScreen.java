@@ -7,10 +7,11 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.awt.*;
 import java.time.Duration;
 
-public abstract class BaseScreen {
-    private static AppiumDriver driver;
+public abstract class BaseScreen  {
+    protected AppiumDriver driver;
     public BaseScreen(AppiumDriver driver){
         this.driver = driver;
         PageFactory.initElements(
