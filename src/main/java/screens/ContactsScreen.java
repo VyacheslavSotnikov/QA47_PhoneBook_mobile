@@ -16,6 +16,9 @@ public class ContactsScreen extends BaseScreen {
         super((AppiumDriver) driver);
     }
 
+    @FindBy(xpath = "//*[@resource-id='com.sheygam.contactapp:id/add_contact_btn']")
+    WebElement btnAddNewContactPlus;
+
     public boolean validateContactsScreenOpen(String text) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -25,6 +28,10 @@ public class ContactsScreen extends BaseScreen {
         } catch (TimeoutException e) {
             return false;
         }
+    }
+
+    public void  clickBtnPlus(){
+        btnAddNewContactPlus.click();
     }
 }
 

@@ -38,4 +38,11 @@ public class AuthenticationScreen extends BaseScreen {
             return false;
         }
     }
+
+    public void typeLoginForm(User user){
+        inputEmail.sendKeys(user.getUsername());
+        inputPassword.sendKeys(user.getPassword());
+        btnLogin.click();
+
+    }
 }
