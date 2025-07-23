@@ -26,4 +26,9 @@ public class SplashTest extends AppiumConfig {
         Assert.assertTrue(loaded, "Auth screen not loaded");
         System.out.println("Auth screen loaded in " + duration + " ms");
     }
+
+    @Test
+    public void validateSplashScreenTimeTest(){
+        Assert.assertTrue(new SplashScreen(driver).validateSplashScreenToDisappear(5000));
+    }
 }
