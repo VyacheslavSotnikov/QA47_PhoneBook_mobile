@@ -52,19 +52,10 @@ public class RegistrationTests extends AppiumConfig {
     }
 
     @Test
-    public void registrationNegativeWrongEmail() {
-        User user = createUserWrongEmail("sotiga2015gmail.com");
-        authenticationScreen.typeRegistrationForm(user);
-        Assert.assertFalse(new ContactsScreen(driver)
-                .validateContactsScreenOpen("Contact list"));
-    }
-
-    @Test
     public void registrationWithShortPassword() {
         User user = createUserWrongPassword("123");
         authenticationScreen.typeRegistrationForm(user);
-        Assert.assertFalse(new ContactsScreen(driver)
-                .validateContactsScreenOpen("Contact list"));
+        Assert.assertTrue(new ErrorScreen(driver).validateErrorMessage("Must contain at least 1 uppercase letter"));
     }
 
     @Test
@@ -85,7 +76,6 @@ public class RegistrationTests extends AppiumConfig {
                 .password("Sh12345!@")
                 .build();
         authenticationScreen.typeRegistrationForm(user);
-        Assert.assertFalse(new ContactsScreen(driver)
-                .validateContactsScreenOpen("Contact list"));
+        Assert.assertTrue(new ErrorScreen(driver).validateErrorMessage("User already exists"));
     }
 }

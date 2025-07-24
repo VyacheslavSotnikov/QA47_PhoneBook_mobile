@@ -1,12 +1,14 @@
 package ui_mobile;
 
 import config.AppiumConfig;
+import dto.Contact;
 import dto.User;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import screens.*;
 
+import static org.openqa.selenium.devtools.v108.debugger.Debugger.pause;
 import static utils.ContactFactory.*;
 
 public class AddNewContactTest  extends AppiumConfig {
@@ -50,6 +52,14 @@ public class AddNewContactTest  extends AppiumConfig {
         addNewContactScreen.typeContactForm(createNegativeContact_wrongName(""));
         Assert.assertTrue(new ErrorScreen(driver).validateErrorMessage("name=must not be blank"));
     }
+
+    @Test
+    public void AddNewContactNegativeTest_withoutAddress(){
+        addNewContactScreen.typeContactForm(createNegativeContact_wrongAddress(""));
+        Assert.assertTrue(new ErrorScreen(driver).validateErrorMessage("address=must not be blank"));
+    }
+
+    
 }
 
 

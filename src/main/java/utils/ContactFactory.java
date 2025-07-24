@@ -48,4 +48,16 @@ public class ContactFactory {
                 .description("description")
                 .build();
     }
+
+    public static Contact createNegativeContact_wrongAddress(String address){
+        return Contact.builder()
+                .name(generateString(5))
+                .lastName(generateString(10))
+                .email(generateEmail(12))
+                .phone(generatePhone(10))
+                .address(address)
+                .description("description")
+                .build();
+    }
+
 }
