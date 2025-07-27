@@ -2,8 +2,12 @@ package screens;
 
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.testng.annotations.Test;
+
+import javax.swing.*;
+import java.util.List;
 
 public class ContactsScreen extends BaseScreen{
     public ContactsScreen(AppiumDriver driver) {
@@ -16,11 +20,62 @@ public class ContactsScreen extends BaseScreen{
     @FindBy(xpath = "//*[@resource-id='com.sheygam.contactapp:id/add_contact_btn']")
     WebElement btnAddNewContactPlus;
 
+    @FindBy(xpath = "//*[@resource-id='com.sheygam.contactapp:id/rowContainer']")
+    List<WebElement> listContact;
+
+    @FindBy(xpath = "//*[@text = 'YES']")
+    WebElement btnYes;
+
     public boolean validateContactsScreenOpen(String text){
         return textInElementPresent(textContactList, text, 10);
     }
 
     public void clickBtnPlus(){
         btnAddNewContactPlus.click();
+    }
+
+    public void scrollLastContact() {
+        int height = driver.manage().window().getSize().getHeight();
+        int width = driver.manage().window().getSize().getWidth();
+        System.out.println(height + "X" + width);
+        System.out.println("-->" + listContact.size());
+        Actions actions = new Actions(driver);
+        boolean flag = true;
+        while (flag) {
+            String first = listContact.get(listContact.size()-1).getText();
+            System.out.println("first--->" + first);
+            actions.dragAndDrop(listContact.get(listContact.size()-1), listContact.get(0)).perform();
+            String second = listContact.get(listContact.size()-1).getText();
+            System.out.println("second--->" + second);
+            if(first.equals(second))
+                flag = false;
+        }
+    }
+
+    public void clickToLastContact(){
+        listContact.get(listContact.size()-1).click();
+    }
+
+    public void swipeRightToLeft(){
+        int width = driver.manage().window().getSize().getWidth();
+        Actions actions = new Actions(driver);
+        actions.moveToElement(listContact.get(0), -width/100*45, 0)
+                .clickAndHold().moveToElement(listContact.get(0), width/100*45, 0)
+                .release()
+                .perform();
+    }
+
+    public void clickBtnYes(){
+        btnYes.click();
+    }
+
+    public EditContactScreen swipeLeftToRight(){
+        int width = driver.manage().window().getSize().getWidth();
+        Actions actions = new Actions(driver);
+        actions.moveToElement(listContact.get(0), width/100*45, 0)
+                .clickAndHold().moveToElement(listContact.get(0), -width/100*45, 0)
+                .release()
+                .perform();
+        return new EditContactScreen(driver);
     }
 }

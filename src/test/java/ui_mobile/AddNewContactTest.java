@@ -15,7 +15,7 @@ public class AddNewContactTest  extends AppiumConfig {
 
     ContactsScreen contactsScreen;
     AddNewContactScreen addNewContactScreen;
-    ErrorScreen errorScreen;
+    ContactScreen contactScreen;
 
     @BeforeMethod
     public void login() {
@@ -34,6 +34,17 @@ public class AddNewContactTest  extends AppiumConfig {
     public void AddNewContactPositiveTest(){
         addNewContactScreen.typeContactForm(createPositiveContact());
         Assert.assertTrue(addNewContactScreen.validateMessageSuccess("Contact was added!"));
+    }
+
+    @Test
+    public void AddNewContactPositiveTest_validateDataContact(){
+        Contact contact = createPositiveContact();
+        addNewContactScreen.typeContactForm(contact);
+       contactsScreen.scrollLastContact();
+       contactsScreen.clickToLastContact();
+       contactScreen = new ContactScreen(driver);
+       contactScreen.getContact();
+       Assert.assertEquals(contactScreen.getContact(), contact);
     }
 
     @Test
@@ -58,8 +69,6 @@ public class AddNewContactTest  extends AppiumConfig {
         addNewContactScreen.typeContactForm(createNegativeContact_wrongAddress(""));
         Assert.assertTrue(new ErrorScreen(driver).validateErrorMessage("address=must not be blank"));
     }
-
-    
 }
 
 
