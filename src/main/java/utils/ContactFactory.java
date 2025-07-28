@@ -44,7 +44,18 @@ public class ContactFactory {
                 .lastName(generateString(10))
                 .email(generateEmail(10))
                 .phone(generatePhone(10))
-                .address("Address "+generateString(10))
+                .address("Address "+ generateString(10))
+                .description("description")
+                .build();
+    }
+
+    public static Contact createNegativeContact_wrongLastName(String lastname){
+        return Contact.builder()
+                .name(generateString(5))
+                .lastName(lastname)
+                .email(generateEmail(10))
+                .phone(generatePhone(10))
+                .address("Address "+ generateString(10))
                 .description("description")
                 .build();
     }
